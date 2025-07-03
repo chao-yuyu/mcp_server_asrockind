@@ -22,18 +22,9 @@ from mcp.server import Server
 from mcp.server.stdio import stdio_server
 from mcp.shared.exceptions import McpError
 from mcp.types import Tool, TextContent, ImageContent, EmbeddedResource
+from .config import get_config, get_scraping_config
+from .fallback_scraper import FallbackScraper
 
-# Import configuration and fallback scraper
-try:
-    from .config import get_config, get_scraping_config
-    from .fallback_scraper import FallbackScraper
-except ImportError:
-    # Handle case when running as main module
-    import sys
-    import os
-    sys.path.append(os.path.dirname(__file__))
-    from config import get_config, get_scraping_config
-    from fallback_scraper import FallbackScraper
 
 # Configure logging
 config = get_config()
